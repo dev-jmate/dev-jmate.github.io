@@ -1,3 +1,130 @@
+
+// Defino variables y armo .json
+let cantidad = 0;
+let total = 0;
+let carrito = {};
+
+
+//Defino listado de productos
+let productos = [
+    {nombre: "Asado Premium", precio: 5000},
+    {nombre: "Asado Standard", precio: 2000},
+    {nombre: "Asado basic", precio: 1000},
+]
+
+//Muestro el html para cada producto
+for (let p of productos) {
+    let contenedor = document.createElement("div");
+    contenedor.innerHTML = `
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <div class="producto">
+            <h5 class="card-title">${p.nombre}</h5>
+            <p class="card-text">Descripcion del producto</p>
+            <p>Precio: ${p.precio}</p>
+            <button class="btn btn-primary" id="agregarProductos" data-precio="5000" data-title="Product one">Agregar</button>
+            <button class= "btn btn-danger" data-precio="5000" id = "eliminarProducto1">Eliminar</button>
+          </div>
+        </div>
+        </div>
+      </div>
+      `;
+  
+    document.body.appendChild(contenedor);
+  }
+
+//Parseo cada elemento en localstorage
+
+if (localStorage.getItem("carrito")) {
+    carrito = JSON.parse(localStorage.getItem("carrito"));
+}
+
+if (localStorage.getItem("cantidad")) {
+    cantidad = parseInt(localStorage.getItem("cantidad"));
+}
+
+if (localStorage.getItem("total")) {
+    total = parseInt(localStorage.getItem("total"));
+}
+
+
+actualizarCarrito();
+
+
+//Obtengo botones row para agregar / eliminar
+let botones = document.querySelectorAll(".row button");
+
+for (let i = 0; i < botones.length; i++) {
+    let boton = botones[i];
+    boton.addEventListener("click", agregar);
+
+}
+
+
+const btnEliminar = document.getElementById("eliminarProducto1")
+
+for (let i = 0; i < btnEliminar.length; i++) {
+    let boton = botones[i];
+    boton.addEventListener("click", eliminar);
+
+}
+
+
+// Funcion eliminar
+function eliminar(event) {
+    let precio = Number(event.target.dataset.precio);
+    cantidad--;
+    total -= precio;
+    actualizarCarrito();
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    
+}
+
+/// Funcion agregar
+function agregar(event) {
+    let precio = Number(event.target.dataset.precio);
+    cantidad++;
+    total += precio;
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    actualizarCarrito();
+}
+
+function actualizarCarrito() {
+    localStorage.setItem("cantidad", cantidad);
+    localStorage.setItem("total", total);
+    document.getElementById("cantidad").textContent = cantidad;
+    document.getElementById("total").textContent = total;
+}
+
+/*const btnNuevo = document.getElementById("carrito")
+
+console.log(btnNuevo)
+
+btnNuevo.addEventListener("click", ()=>{
+    location.href = 'nuevo.html'    
+})
+
+const buscador = document.getElementById("buscador")
+
+buscador.addEventListener("input", ()=> {
+    console.log("El usuario utiliza input search")
+})
+
+
+const nombre = prompt("Ingrese su nombre")
+
+const nombreStr =  JSON.stringify(nombre)
+localStorage.setItem("Nombre de usuario", nombreStr)
+
+
+
+
+
+/*
+
 let totalPrecio = 0;
 // Instancio el objeto invitado
 class Invitado {
