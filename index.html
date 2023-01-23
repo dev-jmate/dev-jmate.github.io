@@ -6,29 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="bootstrap.css" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <!-- MENU DE NAVEGACIÓN -->
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <span class="navbar-brand mb-0 h1">La app de Mate</span>
-      <button class="btn btn-primary"><a href="#carrito">Mi carrito 
+      <button class="btn btn-primary" id="miCarrito"><a href="#carrito">Mi carrito 
         <span id="cantidad">0</span>, Monto total:
         <span id="total">0</span> </a></button>
     </div>
   </nav>
   <!-- CONTENEDOR DE PRODUCTOS -->
+  <h1 align="center" style="margin: 30px;">Encontrá el producto que estas buscando</h1>
   <div class="container-products">
-    <input
-      type="text"
-      class="form-control mb-3"
-      placeholder="Buscar"
-      id="buscador"
-    />
-    
   </div>
+  <div class="listadoProductos"></div>
   <!-- ESPACIO PARA MOSTRAR INFO DEL CARRITO -->
-  <div id="carrito"></div>
+  <div id="carrito">
+  </div>
   <!-- SCRIPTS -->
   <script src="./proyectoMateo.js"></script>
   <!-- Script Toastify -->
